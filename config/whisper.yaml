@@ -1,0 +1,41 @@
+/**:
+  ros__parameters:
+    input_topic: /audio_raw
+    text_topic: /asr_text
+    # 把识别出的最近指令词发布到这个话题，格式 "<cmd>:<conf>"（如 "右转:95"）。
+    # 留空则只发 /asr_text，不发指令事件。
+    intent_topic: /asr_intent
+    enable_profile: true
+
+    model.path: ~/topsbot/models/whisper_small/engine_strip.json
+
+    audio.sample_format: s16le
+    audio.sample_rate: 16000
+    audio.channels: 1
+    # 连续语音兜底窗。板上 whisper_small 单次推理固定走 30s 编码窗，与输入
+    # 时长无关 —— 故正常情况按 VAD 断句，本参数只兜底"永不停"的极端情形。
+    audio.segment_seconds: 10.0
+    # 检测到人声后静音超过该时长即触发一次 idle-flush。短指令端到端延迟
+    # ≈ 指令时长 + idle_flush + 补到近满门所需时长 + 推理。
+    audio.idle_flush_seconds: 1.5
+    # VAD 门限：最近 ~100ms 音频块 RMS 高于该值记为有人声；按板端底噪标定。
+    audio.vad_rms_threshold: 0.006
+    # 距上次人声超过 idle_flush_seconds 时，缓冲不足此值则不断句，防止把一
+    # 个词内部的短停顿切成两段。
+    audio.min_segment_seconds: 0.4
+    # 整段 RMS 低于该阈值视为静音，跳过推理以省去空转；0 表示关闭门控。
+    audio.silence_rms_threshold: 0.003
+    # 音频缓冲上限（秒）；推理追不上实时输入时丢弃最旧音频防止时延与内存
+    # 无限增长，0 表示不限制。
+    audio.max_buffer_seconds: 120.0
+    # joint_test 里音频源开播前等待 asr 节点加载模型的秒数，避免开头音频丢掉。
+    audio.start_delay_seconds: 5.0
+
+    asr.task: transcribe
+    # 语言设置：支持 ISO 639-1 代码（zh/en/fr）或全名（chinese/english/french）。
+    # 代码层会自动映射 ISO 代码到 SDK 期望的全名格式。
+    # 留空则自动检测语言（会增加 ~0.85s 延迟）。
+    # 注意：只对中文语音设 zh；若混入英文语音会因语言不匹配转出乱码。
+    asr.language: zh
+    # Prompt 引导：列出可能的指令词，引导模型优先输出这些词
+    asr.prompt: "前进,后退,左转,右转,停止,加速,减速,开始,结束,暂停,继续"

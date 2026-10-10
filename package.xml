@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>topsbot_whisper_asr</name>
+  <version>0.5.0</version>
+  <description>Whisper ASR standalone ROS2 node using ta-llmruntime.</description>
+
+  <maintainer email="developer@topsfuture.com">TOPSBOT</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>ament_index_cpp</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+  <depend>std_msgs</depend>
+
+  <!-- ta-llmruntime: high-level C API (ta_llm.h / libta_llm.so) on top of
+       AcuityLLM Runtime, shipped by libviplite-9200o. Not a rosdistro key:
+       resolved by tools/scripts/rosdep/topsbot.yaml. -->
+  <depend>ta-llmruntime</depend>
+
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

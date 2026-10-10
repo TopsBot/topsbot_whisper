@@ -1,0 +1,29 @@
+install_dir: "~/topsbot/models/whisper_small"
+
+# 单核 int8 模型（默认）。
+# 来自 model-zoo/samples/Whisper/scripts/download.sh 的 MODEL_SMALL_1CORE_INT8_URL。
+models_zip_url: "https://bj25486.apps.aliyunfile.com/disk/s/MqkxYAdNXSN?domainId=bj25486"
+
+# 双核 int8 模型（对应双核组合模式）。
+# 来自 model-zoo 的 MODEL_SMALL_2CORE_INT8_URL。
+# models_zip_url_2core: "https://bj25486.apps.aliyunfile.com/disk/s/r1KjqLoTijz?domainId=bj25486"
+
+# 测试音频（model-zoo 里的 TEST_IMAGE_URL，实为 output.pcm / output.wav）。
+# test_audio_url: "https://bj25486.apps.aliyunfile.com/disk/s/3GjiF6haoWv?domainId=bj25486"
+
+# 转写推理必需（README 3.1 节「使用提供的模型」产物清单）。
+# 入口是 engine_strip.json（已裁剪权重），自编译未裁剪时才是 engine.json。
+required_models:
+  - engine_strip.json
+  - whisper_strip.alm
+  - tokenizer.json
+  - vocab.json
+  - merges.txt
+
+# 其余随压缩包一起提供，不影响转写，仅完整性检查用。
+optional_models:
+  - tokenizer_config.json
+  - preprocessor_config.json
+  - analysis.json
+  - output.pcm
+  - output.wav

@@ -1,0 +1,7 @@
+/**:
+  ros__parameters:
+    model.path: ~/topsbot/models/whisper_small/engine_strip.json
+
+    asr.task: transcribe
+    asr.language: ""
+    asr.prompt: ""
