@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>topsbot_whisper_asr</name>
-  <version>0.5.0</version>
+  <version>0.5.1</version>
   <description>Whisper ASR standalone ROS2 node using ta-llmruntime.</description>
 
   <maintainer email="developer@topsfuture.com">TOPSBOT</maintainer>
